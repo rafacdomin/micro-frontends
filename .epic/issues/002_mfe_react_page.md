@@ -37,3 +37,85 @@ Implementar a página `/catalog` dentro do `mfe-react` utilizando os componentes
 
 ## Estimativa P / M / G
 M
+
+---
+
+## Pesquisa
+De acordo com `references/GUIDE.md` (seção 8), o catálogo de produtos no `mfe-react` deve usar:
+- Os componentes `Card`, `Button` e `Tag` de `@rafacdomin/ds-core`.
+- Estilos modulares definidos em `Page.module.scss`.
+
+Para testes unitários com Vitest no React 18:
+- Usaremos `jsdom` como ambiente de teste.
+- `@testing-library/react` para renderizar os componentes e interagir.
+- `@testing-library/jest-dom` para asserções como `.toBeInTheDocument()`.
+
+## Implementação Planejada
+
+### Estrutura do Componente `Page.tsx`
+```tsx
+import { useState } from 'react';
+import { Card, Button, Tag } from '@rafacdomin/ds-core';
+import styles from './Page.module.scss';
+
+interface Product {
+  id: number;
+  name: string;
+  price: string;
+}
+
+const products: Product[] = [
+  { id: 1, name: 'Design System Kit',      price: 'R$ 99,00'  },
+  { id: 2, name: 'Component Library Pro',  price: 'R$ 149,00' },
+  { id: 3, name: 'Storybook Templates',    price: 'R$ 79,00'  },
+];
+
+export function Page() {
+  const [cart, setCart] = useState<number[]>([]);
+
+  const toggle = (id: number) =>
+    setCart(c => c.includes(id) ? c.filter(i => i !== id) : [...c, id]);
+
+  return (
+    <div className={styles.root}>
+      <Tag variant="warning" size="sm">React.js Puro</Tag>
+      <h1>Catálogo de Produtos</h1>
+
+      <div className={styles.grid}>
+        {products.map(p => (
+          <Card key={p.id}>
+            <h2>{p.name}</h2>
+            <strong>{p.price}</strong>
+            <Button
+              variant={cart.includes(p.id) ? 'primary' : 'secondary'}
+              size="sm"
+              onClick={() => toggle(p.id)}
+            >
+              {cart.includes(p.id) ? 'Remover' : 'Adicionar'}
+            </Button>
+          </Card>
+        ))}
+      </div>
+
+      {cart.length > 0 && (
+        <Tag variant="success">{cart.length} item(s) no carrinho</Tag>
+      )}
+    </div>
+  );
+}
+```
+
+## Decisões Técnicas
+- **TDD (Test-Driven Development)**: Criar o arquivo de teste `Page.test.tsx` especificando a renderização e interações de carrinho antes de consolidar o componente.
+- **Mock de dependências externas**: O Design System `@rafacdomin/ds-core` fornece componentes de UI limpos. Certificaremos de que a importação do CSS de estilo do Design System seja incluída para que os testes não quebrem por falta de estilos estruturais de tema.
+
+## Checklist de Implementação
+- [ ] Instalar `@testing-library/react`, `@testing-library/jest-dom`, `vitest` e `jsdom` em `mfe-react`.
+- [ ] Criar o arquivo `vitest.config.ts` no `mfe-react/` para configurar os testes.
+- [ ] Criar `src/components/Page/Page.test.tsx` com os testes para renderização e mutação do estado de carrinho.
+- [ ] Instalar o pacote `@rafacdomin/ds-core@0.1.0`.
+- [ ] Criar o arquivo de estilos `src/components/Page/Page.module.scss`.
+- [ ] Escrever o componente `src/components/Page/Page.tsx`.
+- [ ] Criar `src/components/Page/index.ts` exportando `Page`.
+- [ ] Atualizar `src/App.tsx` para renderizar o componente `<Page />` envelopado com o ThemeProvider se necessário.
+- [ ] Rodar os testes via `npm run test` e verificar o sucesso.
