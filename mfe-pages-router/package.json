@@ -3,18 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3002",
-    "build": "next build",
-    "start": "next start -p 3002",
+    "dev": "NEXT_PRIVATE_LOCAL_WEBPACK=true next dev -p 3002",
+    "build": "NEXT_PRIVATE_LOCAL_WEBPACK=true next build",
+    "start": "NEXT_PRIVATE_LOCAL_WEBPACK=true next start -p 3002",
     "test": "vitest run"
   },
   "dependencies": {
+    "@module-federation/enhanced": "^2.5.0",
+    "@module-federation/nextjs-mf": "^8.8.67",
     "@rafacdomin/ds-core": "^0.1.0",
-    "next": "^15.1.0",
+    "next": "14.2.15",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/node": "^20",
@@ -24,6 +27,7 @@
     "jsdom": "^29.1.1",
     "sass": "^1.71.0",
     "typescript": "^5",
-    "vitest": "^4.1.7"
+    "vitest": "^4.1.7",
+    "webpack": "^5.107.2"
   }
 }
