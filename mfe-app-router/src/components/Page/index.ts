@@ -1,2 +1,1 @@
-// Placeholder for Page component
-export {};
+export * from './Page';
