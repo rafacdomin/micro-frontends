@@ -110,12 +110,12 @@ export function Page() {
 - **Mock de dependências externas**: O Design System `@rafacdomin/ds-core` fornece componentes de UI limpos. Certificaremos de que a importação do CSS de estilo do Design System seja incluída para que os testes não quebrem por falta de estilos estruturais de tema.
 
 ## Checklist de Implementação
-- [ ] Instalar `@testing-library/react`, `@testing-library/jest-dom`, `vitest` e `jsdom` em `mfe-react`.
-- [ ] Criar o arquivo `vitest.config.ts` no `mfe-react/` para configurar os testes.
-- [ ] Criar `src/components/Page/Page.test.tsx` com os testes para renderização e mutação do estado de carrinho.
-- [ ] Instalar o pacote `@rafacdomin/ds-core@0.1.0`.
-- [ ] Criar o arquivo de estilos `src/components/Page/Page.module.scss`.
-- [ ] Escrever o componente `src/components/Page/Page.tsx`.
-- [ ] Criar `src/components/Page/index.ts` exportando `Page`.
-- [ ] Atualizar `src/App.tsx` para renderizar o componente `<Page />` envelopado com o ThemeProvider se necessário.
-- [ ] Rodar os testes via `npm run test` e verificar o sucesso.
+- [x] Instalar `@testing-library/react`, `@testing-library/jest-dom`, `vitest` e `jsdom` em `mfe-react`.
+- [x] Criar o arquivo `vitest.config.ts` no `mfe-react/` para configurar os testes.
+- [x] Criar `src/components/Page/Page.test.tsx` com os testes para renderização e mutação do estado de carrinho.
+- [x] Instalar o pacote `@rafacdomin/ds-core@0.1.0`.
+- [x] Criar o arquivo de estilos `src/components/Page/Page.module.scss`.
+- [x] Escrever o componente `src/components/Page/Page.tsx`.
+- [x] Criar `src/components/Page/index.ts` exportando `Page`.
+- [x] Atualizar `src/App.tsx` para renderizar o componente `<Page />` envelopado com o ThemeProvider se necessário.
+- [x] Rodar os testes via `npm run test` e verificar o sucesso.
