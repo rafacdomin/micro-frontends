@@ -88,13 +88,13 @@ module.exports = {
 - **CORS de Produção**: Usar `vercel.json` com regras de rotas para injetar o header em todos os arquivos estáticos compilados que forem servidos pela Vercel.
 
 ## Checklist de Implementação
-- [ ] Instalar `@module-federation/enhanced` na pasta `mfe-react`.
-- [ ] Modificar `mfe-react/webpack.config.js` para importar `ModuleFederationPlugin` de `@module-federation/enhanced/webpack`.
-- [ ] Adicionar o plugin no array `plugins` com as opções corretas (`name: 'mfe_react'`, `filename: 'remoteEntry.js'`).
-- [ ] Expor o ponto de entrada `./Page` mapeando para `./src/components/Page/index.ts`.
-- [ ] Declarar `react`, `react-dom` e `@rafacdomin/ds-core` no objeto `shared`.
-- [ ] Adicionar cabeçalho CORS (`Access-Control-Allow-Origin: *`) na propriedade `devServer.headers` de `webpack.config.js`.
-- [ ] Criar o arquivo `mfe-react/vercel.json` na raiz do MFE.
-- [ ] Adicionar regras de cabeçalho CORS no `vercel.json` para arquivos da build `/remoteEntry.js` e outros estáticos.
-- [ ] Executar build de produção local `npm run build` e verificar que `remoteEntry.js` é gerado.
-- [ ] Testar localmente se a inicialização com `npm run dev` expõe `remoteEntry.js` na rota `http://localhost:3003/remoteEntry.js`.
+- [x] Instalar `@module-federation/enhanced` na pasta `mfe-react`.
+- [x] Modificar `mfe-react/webpack.config.js` para importar `ModuleFederationPlugin` de `@module-federation/enhanced/webpack`.
+- [x] Adicionar o plugin no array `plugins` com as opções corretas (`name: 'mfe_react'`, `filename: 'remoteEntry.js'`).
+- [x] Expor o ponto de entrada `./Page` mapeando para `./src/components/Page/index.ts`.
+- [x] Declarar `react`, `react-dom` e `@rafacdomin/ds-core` no objeto `shared`.
+- [x] Adicionar cabeçalho CORS (`Access-Control-Allow-Origin: *`) na propriedade `devServer.headers` de `webpack.config.js`.
+- [x] Criar o arquivo `mfe-react/vercel.json` na raiz do MFE.
+- [x] Adicionar regras de cabeçalho CORS no `vercel.json` para arquivos da build `/remoteEntry.js` e outros estáticos.
+- [x] Executar build de produção local `npm run build` e verificar que `remoteEntry.js` é gerado.
+- [x] Testar localmente se a inicialização com `npm run dev` expõe `remoteEntry.js` na rota `http://localhost:3003/remoteEntry.js`.

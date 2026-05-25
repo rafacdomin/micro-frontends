@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { ModuleFederationPlugin } = require('@module-federation/enhanced/webpack');
 
 module.exports = {
   entry: './src/index.tsx',
@@ -46,6 +47,18 @@ module.exports = {
     ],
   },
   plugins: [
+    new ModuleFederationPlugin({
+      name: 'mfe_react',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './Page': './src/components/Page/index.ts',
+      },
+      shared: {
+        react: { singleton: true, requiredVersion: '^18.0.0' },
+        'react-dom': { singleton: true, requiredVersion: '^18.0.0' },
+        '@rafacdomin/ds-core': { singleton: true, requiredVersion: '^0.1.0', import: false },
+      },
+    }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
@@ -55,6 +68,8 @@ module.exports = {
     historyApiFallback: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
     },
   },
 };
