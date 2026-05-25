@@ -3,13 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "NEXT_PRIVATE_LOCAL_WEBPACK=true next dev -p 3001",
+    "build": "NEXT_PRIVATE_LOCAL_WEBPACK=true next build",
+    "start": "NEXT_PRIVATE_LOCAL_WEBPACK=true next start -p 3001",
     "lint": "next lint",
     "test": "vitest run"
   },
   "dependencies": {
+    "@module-federation/enhanced": "^2.5.0",
+    "@module-federation/nextjs-mf": "^8.8.67",
     "@rafacdomin/ds-core": "^0.1.0",
     "next": "14.2.15",
     "react": "^18.3.1",
@@ -26,6 +28,7 @@
     "@vitejs/plugin-react": "^6.0.2",
     "jsdom": "^29.1.1",
     "typescript": "^5",
-    "vitest": "^4.1.7"
+    "vitest": "^4.1.7",
+    "webpack": "^5.107.2"
   }
 }
