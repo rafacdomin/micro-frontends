@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Card, Tag, Button } from '@rafacdomin/ds-core';
+import { Card, Tag } from '@rafacdomin/ds-core';
 
 export default function Home() {
   return (

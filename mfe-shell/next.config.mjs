@@ -19,7 +19,6 @@ class FixResolveContextStackPlugin {
                 if (prev) {
                   prev.parent = node.parent;
                 } else {
-                  // Mutation patch for head of linked list stack
                   if (node.parent) {
                     Object.assign(node, node.parent);
                   } else {
@@ -47,8 +46,29 @@ class FixResolveContextStackPlugin {
   }
 }
 
+const mfeUrls = {
+  appRouter:   process.env.NEXT_PUBLIC_MFE_APP_ROUTER_URL?.replace('/_next/static/chunks/remoteEntry.js', '')
+    ?? 'http://localhost:3001',
+  pagesRouter: process.env.NEXT_PUBLIC_MFE_PAGES_ROUTER_URL?.replace('/_next/static/chunks/remoteEntry.js', '')
+    ?? 'http://localhost:3002',
+  react:       process.env.NEXT_PUBLIC_MFE_REACT_URL?.replace('/remoteEntry.js', '')
+    ?? 'http://localhost:3003',
+};
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  /**
+   * CORS headers for the shell's own chunks (so other MFEs can consume if needed)
+   */
+  async headers() {
+    return [
+      {
+        source: '/_next/static/:path*',
+        headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }],
+      },
+    ];
+  },
+
   webpack(config) {
     config.resolve.plugins = config.resolve.plugins || [];
     config.resolve.plugins.push(new FixResolveContextStackPlugin());
