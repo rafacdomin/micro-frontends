@@ -49,11 +49,10 @@ class FixResolveContextStackPlugin {
 }
 
 const nextConfig = {
-  swcMinify: false,
   async headers() {
     return [
       {
-        source: '/_next/static/:path*/remoteEntry.js',
+        source: '/_next/static/:path*',
         headers: [
           { key: 'Access-Control-Allow-Origin', value: '*' },
           { key: 'Access-Control-Allow-Methods', value: 'GET, OPTIONS' },
@@ -66,10 +65,17 @@ const nextConfig = {
     config.resolve.plugins = config.resolve.plugins || [];
     config.resolve.plugins.push(new FixResolveContextStackPlugin());
 
-    // Alias react and react-dom to ensure singleton usage during build
-    // config.resolve.alias = config.resolve.alias || {};
-    // config.resolve.alias['react'] = path.resolve(__dirname, 'node_modules/react');
-    // config.resolve.alias['react-dom'] = path.resolve(__dirname, 'node_modules/react-dom');
+    // Namespace chunk loading to avoid collisions with shell
+    if (!isServer) {
+      config.output.chunkLoadingGlobal = 'webpackChunk_mfe_pages_router';
+    }
+
+    // Force singleton React - prevents "Cannot read properties of null (reading 'useContext')" SSR error
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      react: path.resolve(__dirname, 'node_modules/react'),
+      'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
+    };
 
     // Map node:module to a proper CommonJS external to prevent syntax errors
     config.externals = config.externals || [];
@@ -90,6 +96,9 @@ const nextConfig = {
           react: { singleton: true, requiredVersion: false },
           'react-dom': { singleton: true, requiredVersion: false },
           '@rafacdomin/ds-core': { singleton: true, requiredVersion: '^0.1.0' },
+        },
+        extraOptions: {
+          skipSharingNextInternals: true,
         },
       })
     );

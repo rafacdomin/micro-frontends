@@ -1,25 +1,18 @@
 import React from 'react';
-import Head from 'next/head';
-import { ThemeProvider } from '@rafacdomin/ds-core';
-import { Page } from '@/components/Page';
+import dynamic from 'next/dynamic';
+
+// Wrap the entire page in a dynamic import with ssr:false to avoid
+// NextFederationPlugin's SSR React context conflicts
+const ProfilePage = dynamic(
+  () => import('@/components/ProfilePage'),
+  { ssr: false }
+);
 
 export default function Home() {
-  return (
-    <>
-      <Head>
-        <title>Profile Standalone - MFE App Router</title>
-        <meta name="description" content="Profile MFE App Router standalone mode" />
-      </Head>
-      <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <ThemeProvider>
-          <Page />
-        </ThemeProvider>
-      </main>
-    </>
-  );
+  return <ProfilePage />;
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   return {
     props: {},
   };

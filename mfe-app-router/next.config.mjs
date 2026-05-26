@@ -53,7 +53,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/_next/static/:path*/remoteEntry.js',
+        source: '/_next/static/:path*',
         headers: [
           { key: 'Access-Control-Allow-Origin', value: '*' },
           { key: 'Access-Control-Allow-Methods', value: 'GET, OPTIONS' },
@@ -65,6 +65,18 @@ const nextConfig = {
   webpack(config, { isServer }) {
     config.resolve.plugins = config.resolve.plugins || [];
     config.resolve.plugins.push(new FixResolveContextStackPlugin());
+
+    // Namespace chunk loading to avoid collisions with shell
+    if (!isServer) {
+      config.output.chunkLoadingGlobal = 'webpackChunk_mfe_app_router';
+    }
+
+    // Force singleton React - prevents "Cannot read properties of null (reading 'useContext')" SSR error
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      react: path.resolve(__dirname, 'node_modules/react'),
+      'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
+    };
 
     // Map node:module to a proper CommonJS external to prevent syntax errors
     config.externals = config.externals || [];
@@ -87,7 +99,7 @@ const nextConfig = {
           '@rafacdomin/ds-core': { singleton: true, requiredVersion: '^0.1.0' },
         },
         extraOptions: {
-          automaticAsyncBoundary: true,
+          skipSharingNextInternals: true,
         },
       })
     );

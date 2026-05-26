@@ -32,13 +32,27 @@ module.exports = {
               modules: true,
             },
           },
-          'sass-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              api: 'modern',
+            },
+          },
         ],
       },
       {
         test: /\.scss$/,
         exclude: /\.module\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              api: 'modern',
+            },
+          },
+        ],
       },
       {
         test: /\.css$/,
@@ -56,7 +70,7 @@ module.exports = {
       shared: {
         react: { singleton: true, requiredVersion: '^18.0.0' },
         'react-dom': { singleton: true, requiredVersion: '^18.0.0' },
-        '@rafacdomin/ds-core': { singleton: true, requiredVersion: '^0.1.0', import: false },
+        '@rafacdomin/ds-core': { singleton: true, requiredVersion: '^0.1.0' },
       },
     }),
     new HtmlWebpackPlugin({
@@ -66,6 +80,9 @@ module.exports = {
   devServer: {
     port: 3003,
     historyApiFallback: true,
+    client: {
+      overlay: false,
+    },
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',

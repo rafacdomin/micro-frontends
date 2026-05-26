@@ -1,28 +1,23 @@
-import Head from 'next/head';
-import { ThemeProvider } from '@rafacdomin/ds-core';
-import { Page, Metric } from '@/components/Page';
+import React from 'react';
+import dynamic from 'next/dynamic';
+import type { Metric } from '@/components/Page';
 
 interface HomeProps {
   initialMetrics: Metric[];
 }
 
+// Wrap the entire page in dynamic(ssr:false) to avoid
+// NextFederationPlugin's SSR React context conflicts with ThemeProvider
+const DashboardPage = dynamic(
+  () => import('@/components/DashboardPage'),
+  { ssr: false }
+);
+
 export default function Home({ initialMetrics }: HomeProps) {
-  return (
-    <>
-      <Head>
-        <title>Dashboard Standalone - MFE Pages Router</title>
-        <meta name="description" content="Dashboard MFE Pages Router standalone mode" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <ThemeProvider>
-        <Page initialMetrics={initialMetrics} />
-      </ThemeProvider>
-    </>
-  );
+  return <DashboardPage initialMetrics={initialMetrics} />;
 }
 
-export async function getServerSideProps() {
-  // Simulando busca de dados do servidor (SSR)
+export async function getStaticProps() {
   const initialMetrics: Metric[] = [
     { label: 'Requests/min', value: '4.850',  status: 'ok'   },
     { label: 'Error rate',   value: '0.01%',  status: 'ok'   },

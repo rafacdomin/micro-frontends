@@ -56,6 +56,31 @@ class RemoteBoundary extends Component<
           }}>
             {this.state.error?.message || 'Erro desconhecido de carregamento.'}
           </div>
+          {typeof window !== 'undefined' && (
+            <div style={{ marginTop: '1rem', textAlign: 'left' }}>
+              <strong style={{ fontSize: '0.85rem' }}>Webpack Share Scope Diagnostics:</strong>
+              <pre style={{
+                fontSize: '0.75rem',
+                backgroundColor: '#f3f4f6',
+                padding: '0.5rem',
+                borderRadius: '6px',
+                border: '1px solid #e5e7eb',
+                overflowX: 'auto',
+                fontFamily: 'monospace',
+                maxHeight: '200px',
+                margin: '0.25rem 0 0 0'
+              }}>
+                {JSON.stringify(
+                  (window as any).__webpack_share_scopes__,
+                  (key, val) => {
+                    if (typeof val === 'function') return '[Function]';
+                    return val;
+                  },
+                  2
+                )}
+              </pre>
+            </div>
+          )}
         </div>
       );
     }
