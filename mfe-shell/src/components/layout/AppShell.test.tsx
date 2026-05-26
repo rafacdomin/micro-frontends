@@ -19,10 +19,10 @@ describe('AppShell Layout Framework', () => {
     );
 
     // Header logo
-    expect(screen.getByText('Micro-Frontend Shell')).toBeInTheDocument();
+    expect(screen.getByText('MFE Shell')).toBeInTheDocument();
 
     // Sidebar items and badges
-    expect(screen.getByText('Home (mfe-react)')).toBeInTheDocument();
+    expect(screen.getByText('Home')).toBeInTheDocument();
     expect(screen.getByText('React MFE')).toBeInTheDocument();
     expect(screen.getByText('Página 1')).toBeInTheDocument();
     expect(screen.getByText('Pages Router')).toBeInTheDocument();
@@ -34,6 +34,6 @@ describe('AppShell Layout Framework', () => {
     expect(screen.getByText('Conteúdo de Teste')).toBeInTheDocument();
 
     // Footer
-    expect(screen.getByText(/Platform Micro-Frontends/i)).toBeInTheDocument();
+    expect(screen.getByText(/Platform MFE/i)).toBeInTheDocument();
   });
 });

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "@rafacdomin/ds-core/dist/index.css";
-import "@rafacdomin/ds-carousel/dist/index.css";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { AppShell } from "@/components/layout/AppShell";

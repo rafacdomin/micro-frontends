@@ -12,16 +12,16 @@ describe('Page Component - Portfólio de Configurações', () => {
     );
 
     // Título principal
-    expect(screen.getByText('Portfólio de Configurações')).toBeInTheDocument();
+    expect(screen.getByText('MFE React com Module Federation 2.0')).toBeInTheDocument();
 
     // Aplicações e tecnologias
     expect(screen.getByText('Host (mfe-shell)')).toBeInTheDocument();
-    expect(screen.getByText('Home Remote (mfe-react)')).toBeInTheDocument();
+    expect(screen.getByText('Home (mfe-react)')).toBeInTheDocument();
     expect(screen.getByText('Página 1 (mfe-pages-router)')).toBeInTheDocument();
     expect(screen.getByText('Página 2 (mfe-app-router)')).toBeInTheDocument();
 
     // Tecnologias descritas nos badges
-    expect(screen.getByText('React 18 Puro + Webpack 5')).toBeInTheDocument();
+    expect(screen.getByText('React 18 + Webpack 5')).toBeInTheDocument();
     expect(screen.getByText('Next.js 15 Pages Router')).toBeInTheDocument();
     expect(screen.getAllByText('Next.js 15 App Router')).toHaveLength(2);
   });

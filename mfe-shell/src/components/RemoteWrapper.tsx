@@ -1,6 +1,7 @@
 'use client';
 
 import React, { Component, Suspense } from 'react';
+import { Card } from '@rafacdomin/ds-core';
 
 class RemoteBoundary extends Component<
   { children: React.ReactNode; name: string },
@@ -22,65 +23,67 @@ class RemoteBoundary extends Component<
   render() {
     if (this.state.hasError) {
       return (
-        <div 
-          role="alert" 
-          style={{
-            padding: '2rem',
-            border: '1px solid #fee2e2',
-            backgroundColor: '#fef2f2',
-            borderRadius: '12px',
-            fontFamily: 'sans-serif',
-            color: '#991b1b',
-            maxWidth: '500px',
-            margin: '2rem auto',
-            textAlign: 'center',
-            boxShadow: '0 4px 12px rgba(153, 27, 27, 0.05)'
-          }}
-        >
-          <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>⚠️</div>
-          <h3 style={{ margin: '0 0 0.5rem 0', fontWeight: 700 }}>
-            Micro-Frontend Indisponível
-          </h3>
-          <p style={{ fontSize: '0.95rem', margin: '0 0 1rem 0', color: '#7f1d1d', lineHeight: 1.5 }}>
-            O serviço <strong>{this.props.name}</strong> falhou ou não pôde ser carregado.
-          </p>
-          <div style={{ 
-            fontSize: '0.8rem', 
-            backgroundColor: '#fff', 
-            padding: '0.75rem', 
-            borderRadius: '6px', 
-            border: '1px solid #fca5a5', 
-            textAlign: 'left',
-            overflowX: 'auto',
-            fontFamily: 'monospace'
-          }}>
-            {this.state.error?.message || 'Erro desconhecido de carregamento.'}
-          </div>
-          {typeof window !== 'undefined' && (
-            <div style={{ marginTop: '1rem', textAlign: 'left' }}>
-              <strong style={{ fontSize: '0.85rem' }}>Webpack Share Scope Diagnostics:</strong>
-              <pre style={{
-                fontSize: '0.75rem',
-                backgroundColor: '#f3f4f6',
-                padding: '0.5rem',
-                borderRadius: '6px',
-                border: '1px solid #e5e7eb',
+        <div style={{ maxWidth: '500px', margin: '2rem auto' }}>
+          <Card variant="bordered">
+            <div 
+              role="alert" 
+              style={{
+                padding: '2rem',
+                fontFamily: 'var(--font-geist-sans), sans-serif',
+                color: 'var(--color-danger, #ef4444)',
+                textAlign: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1rem'
+              }}
+            >
+              <div style={{ fontSize: '2.5rem' }}>⚠️</div>
+              <h3 style={{ margin: '0', fontWeight: 700, fontSize: '1.25rem' }}>
+                Micro-Frontend Indisponível
+              </h3>
+              <p style={{ fontSize: '0.95rem', margin: '0', color: 'var(--color-text-muted, #4b5563)', lineHeight: 1.5 }}>
+                O serviço <strong>{this.props.name}</strong> falhou ou não pôde ser carregado.
+              </p>
+              <div style={{ 
+                fontSize: '0.8rem', 
+                backgroundColor: 'var(--color-bg-base, #f3f4f6)', 
+                padding: '0.75rem', 
+                borderRadius: 'var(--radius-sm, 6px)', 
+                border: '1px solid var(--color-border, #e5e7eb)', 
+                textAlign: 'left',
                 overflowX: 'auto',
                 fontFamily: 'monospace',
-                maxHeight: '200px',
-                margin: '0.25rem 0 0 0'
+                color: 'var(--color-text-main, #111827)'
               }}>
-                {JSON.stringify(
-                  (window as any).__webpack_share_scopes__,
-                  (key, val) => {
-                    if (typeof val === 'function') return '[Function]';
-                    return val;
-                  },
-                  2
-                )}
-              </pre>
+                {this.state.error?.message || 'Erro desconhecido de carregamento.'}
+              </div>
+              {typeof window !== 'undefined' && (
+                <div style={{ marginTop: '1rem', textAlign: 'left', color: 'var(--color-text-main, #111827)' }}>
+                  <strong style={{ fontSize: '0.85rem' }}>Webpack Share Scope Diagnostics:</strong>
+                  <pre style={{
+                    fontSize: '0.75rem',
+                    backgroundColor: 'var(--color-bg-base, #f3f4f6)',
+                    padding: '0.5rem',
+                    borderRadius: 'var(--radius-sm, 6px)',
+                    border: '1px solid var(--color-border, #e5e7eb)',
+                    overflowX: 'auto',
+                    fontFamily: 'monospace',
+                    maxHeight: '200px',
+                    margin: '0.25rem 0 0 0'
+                  }}>
+                    {JSON.stringify(
+                      (window as any).__webpack_share_scopes__,
+                      (key, val) => {
+                        if (typeof val === 'function') return '[Function]';
+                        return val;
+                      },
+                      2
+                    )}
+                  </pre>
+                </div>
+              )}
             </div>
-          )}
+          </Card>
         </div>
       );
     }

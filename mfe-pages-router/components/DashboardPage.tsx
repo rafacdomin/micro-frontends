@@ -1,15 +1,11 @@
 import React from 'react';
 import { ThemeProvider } from '@rafacdomin/ds-core';
-import { Page, Metric } from './Page';
+import { Page } from './Page';
 
-interface DashboardPageProps {
-  initialMetrics?: Metric[];
-}
-
-export default function DashboardPage({ initialMetrics }: DashboardPageProps) {
+export default function DashboardPage() {
   return (
     <ThemeProvider>
-      <Page initialMetrics={initialMetrics} />
+      <Page />
     </ThemeProvider>
   );
 }
