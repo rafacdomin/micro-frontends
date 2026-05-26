@@ -6,7 +6,7 @@ export function Footer() {
 
   return (
     <footer className={styles.footer}>
-      <p>&copy; {currentYear} Platform Micro-Frontends. All rights reserved.</p>
+      <p>&copy; {currentYear} Platform MFE. All rights reserved.</p>
     </footer>
   );
 }

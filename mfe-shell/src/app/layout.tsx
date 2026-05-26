@@ -18,8 +18,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Micro-Frontend Shell Platform",
-  description: "Micro-Frontend Shell Platform consuming ds-core and ds-carousel",
+  title: "MFE Shell Platform",
+  description: "MFE Shell Platform consuming ds-core and ds-carousel",
 };
 
 export default function RootLayout({

@@ -7,9 +7,9 @@ import { Tag } from '@rafacdomin/ds-core';
 import styles from './layout.module.scss';
 
 const routes = [
-  { path: '/',        label: 'Home (mfe-react)',    badge: 'React MFE',    color: 'danger' },
-  { path: '/page1',   label: 'Página 1',            badge: 'Pages Router', color: 'secondary' },
-  { path: '/page2',   label: 'Página 2',            badge: 'App Router',   color: 'primary' },
+  { path: '/',        label: 'Home',      badge: 'React MFE',    color: 'danger' },
+  { path: '/page1',   label: 'Página 1',  badge: 'Pages Router', color: 'secondary' },
+  { path: '/page2',   label: 'Página 2',  badge: 'App Router',   color: 'primary' },
 ] as const;
 
 export function Sidebar() {

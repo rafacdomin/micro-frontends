@@ -19,9 +19,9 @@ const apps: AppInfo[] = [
     description: 'O orquestrador principal da plataforma. Gerencia o layout global (cabeçalho, barra lateral, rodapé), roteamento do navegador, tratamento de falhas em tempo de execução com Error Boundaries e carregamento dinâmico de remotes.',
   },
   {
-    title: 'Home Remote (mfe-react)',
+    title: 'Home (mfe-react)',
     route: '/',
-    tech: 'React 18 Puro + Webpack 5',
+    tech: 'React 18 + Webpack 5',
     badgeColor: 'danger',
     description: 'Esta própria aplicação que você está visualizando na página inicial. Demonstra a flexibilidade de acoplar microssistemas construídos com React puro sem a necessidade de frameworks complexos de servidor.',
   },
@@ -57,7 +57,7 @@ export function Page() {
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent'
         }}>
-          Portfólio de Configurações
+          MFE React com Module Federation 2.0
         </h1>
         <p style={{ fontSize: '1.1rem', color: 'var(--color-text-muted, #4b5563)', lineHeight: 1.6, maxWidth: '700px', margin: '0 auto' }}>
           Este painel centralizado é provido pelo microfrontend <strong>mfe-react</strong> e demonstra a coexistência harmônica das diferentes stacks compartilhando o mesmo Design System via Module Federation 2.0.
