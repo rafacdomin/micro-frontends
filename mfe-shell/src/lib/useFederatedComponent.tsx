@@ -19,9 +19,9 @@ function initMF() {
   try {
     init({
       name: 'mfe_shell',
+      remotes: [],
       shared: {
         react: {
-          name: 'react',
           version: '18.3.1',
           scope: 'default',
           lib: () => React,
@@ -31,7 +31,6 @@ function initMF() {
           },
         },
         'react-dom': {
-          name: 'react-dom',
           version: '18.3.1',
           scope: 'default',
           lib: () => ReactDOM,
@@ -41,7 +40,6 @@ function initMF() {
           },
         },
         '@rafacdomin/ds-core': {
-          name: '@rafacdomin/ds-core',
           version: '0.1.0',
           scope: 'default',
           lib: () => DsCore,
