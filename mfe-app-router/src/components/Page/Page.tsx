@@ -1,51 +1,28 @@
-'use client';
-
-import { useState } from 'react';
-import { Avatar, Card, Button, Tag, Input } from '@rafacdomin/ds-core';
-import styles from './Page.module.scss';
-
-const skills = ['React', 'TypeScript', 'Design Systems', 'Module Federation'];
+import React from 'react';
+import { Card, Tag } from '@rafacdomin/ds-core';
 
 export function Page() {
-  const [editing, setEditing] = useState(false);
-  const [name, setName] = useState('Rafael Domingues');
-
   return (
-    <div className={styles.container}>
-      <Card className={styles.root}>
-        <div className={styles.headerBadge}>
-          <Tag variant="neutral" size="sm">Next.js App Router</Tag>
-        </div>
+    <div style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto', fontFamily: 'sans-serif', color: 'var(--color-text-main, #1f2937)' }}>
+      <Tag variant="neutral" color="primary" size="sm" style={{ marginBottom: '1rem' }}>
+        Remote MFE App Router
+      </Tag>
+      
+      <Card variant="bordered">
+        <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 700 }}>
+              Next.js 15 App Router Configuration
+            </h2>
+          </div>
+          
+          <p style={{ margin: 0, fontSize: '1rem', color: 'var(--color-text-muted, #4b5563)', lineHeight: 1.6 }}>
+            Esta aplicação microfrontend está rodando de forma independente e é integrada dinamicamente via Module Federation 2.0. Ela utiliza a arquitetura moderna de <strong>Next.js App Router</strong>.
+          </p>
 
-        <div className={styles.profile}>
-          <Avatar name={name} size="lg" />
-          {editing ? (
-            <div className={styles.inputWrapper}>
-              <Input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                aria-label="Nome do usuário"
-              />
-            </div>
-          ) : (
-            <h1>{name}</h1>
-          )}
-          <p className={styles.title}>Senior Frontend Engineer</p>
-        </div>
-
-        <div className={styles.skills}>
-          {skills.map((skill) => (
-            <Tag key={skill} variant="neutral">{skill}</Tag>
-          ))}
-        </div>
-
-        <div className={styles.action}>
-          <Button
-            variant={editing ? 'primary' : 'secondary'}
-            onClick={() => setEditing((e) => !e)}
-          >
-            {editing ? 'Salvar' : 'Editar perfil'}
-          </Button>
+          <p style={{ margin: 0, fontSize: '1rem', color: 'var(--color-text-muted, #4b5563)', lineHeight: 1.6 }}>
+            Sua integração ocorre de forma direta sob a rota <code>/page2</code> do Shell, provendo isolamento de código e encapsulamento de estilos do Design System centralizado <code>@rafacdomin/ds-core</code>.
+          </p>
         </div>
       </Card>
     </div>

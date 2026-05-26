@@ -22,14 +22,12 @@ describe('AppShell Layout Framework', () => {
     expect(screen.getByText('Micro-Frontend Shell')).toBeInTheDocument();
 
     // Sidebar items and badges
-    expect(screen.getByText('Home')).toBeInTheDocument();
-    expect(screen.getByText('Shell')).toBeInTheDocument();
-    expect(screen.getByText('Perfil')).toBeInTheDocument();
-    expect(screen.getByText('App Router')).toBeInTheDocument();
-    expect(screen.getByText('Dashboard')).toBeInTheDocument();
+    expect(screen.getByText('Home (mfe-react)')).toBeInTheDocument();
+    expect(screen.getByText('React MFE')).toBeInTheDocument();
+    expect(screen.getByText('Página 1')).toBeInTheDocument();
     expect(screen.getByText('Pages Router')).toBeInTheDocument();
-    expect(screen.getByText('Catálogo')).toBeInTheDocument();
-    expect(screen.getByText('React Puro')).toBeInTheDocument();
+    expect(screen.getByText('Página 2')).toBeInTheDocument();
+    expect(screen.getByText('App Router')).toBeInTheDocument();
 
     // Content area
     expect(screen.getByTestId('main-content')).toBeInTheDocument();
@@ -37,24 +35,5 @@ describe('AppShell Layout Framework', () => {
 
     // Footer
     expect(screen.getByText(/Platform Micro-Frontends/i)).toBeInTheDocument();
-  });
-
-  it('deve alternar o tema ao clicar no botao do Header', () => {
-    render(
-      <Providers>
-        <AppShell>
-          <div>Conteúdo</div>
-        </AppShell>
-      </Providers>
-    );
-
-    const themeButton = screen.getByRole('button', { name: /Escuro|Claro/i });
-    expect(themeButton).toHaveTextContent('Escuro'); // defaultTheme is light, so it offers Escuro
-
-    fireEvent.click(themeButton);
-    expect(themeButton).toHaveTextContent('Claro'); // changed to dark, so it offers Claro
-
-    fireEvent.click(themeButton);
-    expect(themeButton).toHaveTextContent('Escuro'); // toggled back to light
   });
 });

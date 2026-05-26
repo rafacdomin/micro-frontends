@@ -1,51 +1,28 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { ThemeProvider } from '@rafacdomin/ds-core';
 import { Page } from './Page';
 
-describe('Page Component - Catálogo de Produtos', () => {
-  it('deve renderizar o título e a lista de produtos', () => {
+describe('Page Component - Portfólio de Configurações', () => {
+  it('deve renderizar o título e os cards das aplicações com suas respectivas configurações', () => {
     render(
       <ThemeProvider>
         <Page />
       </ThemeProvider>
     );
-    expect(screen.getByText('Catálogo de Produtos')).toBeInTheDocument();
-    expect(screen.getByText('Design System Kit')).toBeInTheDocument();
-    expect(screen.getByText('Component Library Pro')).toBeInTheDocument();
-    expect(screen.getByText('Storybook Templates')).toBeInTheDocument();
-  });
 
-  it('deve alternar itens no carrinho de compras', () => {
-    render(
-      <ThemeProvider>
-        <Page />
-      </ThemeProvider>
-    );
-    
-    // Inicialmente o carrinho não deve mostrar contagem
-    expect(screen.queryByText(/item\(s\) no carrinho/)).not.toBeInTheDocument();
+    // Título principal
+    expect(screen.getByText('Portfólio de Configurações')).toBeInTheDocument();
 
-    // Adiciona o primeiro item
-    const buttons = screen.getAllByRole('button');
-    expect(buttons[0]).toHaveTextContent('Adicionar');
-    fireEvent.click(buttons[0]);
+    // Aplicações e tecnologias
+    expect(screen.getByText('Host (mfe-shell)')).toBeInTheDocument();
+    expect(screen.getByText('Home Remote (mfe-react)')).toBeInTheDocument();
+    expect(screen.getByText('Página 1 (mfe-pages-router)')).toBeInTheDocument();
+    expect(screen.getByText('Página 2 (mfe-app-router)')).toBeInTheDocument();
 
-    // O botão deve mudar para "Remover" e a tag do carrinho deve aparecer
-    expect(buttons[0]).toHaveTextContent('Remover');
-    expect(screen.getByText('1 item(s) no carrinho')).toBeInTheDocument();
-
-    // Adiciona o segundo item
-    fireEvent.click(buttons[1]);
-    expect(screen.getByText('2 item(s) no carrinho')).toBeInTheDocument();
-
-    // Remove o primeiro item
-    fireEvent.click(buttons[0]);
-    expect(buttons[0]).toHaveTextContent('Adicionar');
-    expect(screen.getByText('1 item(s) no carrinho')).toBeInTheDocument();
-
-    // Remove o segundo item
-    fireEvent.click(buttons[1]);
-    expect(screen.queryByText(/item\(s\) no carrinho/)).not.toBeInTheDocument();
+    // Tecnologias descritas nos badges
+    expect(screen.getByText('React 18 Puro + Webpack 5')).toBeInTheDocument();
+    expect(screen.getByText('Next.js 15 Pages Router')).toBeInTheDocument();
+    expect(screen.getAllByText('Next.js 15 App Router')).toHaveLength(2);
   });
 });

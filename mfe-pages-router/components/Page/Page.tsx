@@ -1,82 +1,30 @@
-import React, { useState } from 'react';
-import { Card, Tag, Dropdown } from '@rafacdomin/ds-core';
-import styles from './Page.module.scss';
+import React from 'react';
+import { Card, Tag } from '@rafacdomin/ds-core';
 
-export interface Metric {
-  label: string;
-  value: string;
-  status: 'ok' | 'warn' | 'error';
-}
-
-interface PageProps {
-  initialMetrics?: Metric[];
-}
-
-const defaultMetrics: Metric[] = [
-  { label: 'Requests/min', value: '4.200',  status: 'ok'   },
-  { label: 'Error rate',   value: '0.02%',  status: 'ok'   },
-  { label: 'Latência p99', value: '320ms',  status: 'warn' },
-];
-
-const statusVariant = { ok: 'primary', warn: 'secondary', error: 'danger' } as const;
-
-export function Page({ initialMetrics = defaultMetrics }: PageProps) {
-  const [filter, setFilter] = useState('all');
-
+export function Page() {
   return (
-    <div className={styles.root}>
-      <Tag variant="neutral" size="sm">Next.js Pages Router</Tag>
-      <h1>Dashboard</h1>
-
-      <div className={styles.summary}>
-        <Card>
-          <div className={styles.cardContent}>
-            <strong>1.240</strong>
-            <span>Usuários ativos</span>
+    <div style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto', fontFamily: 'sans-serif', color: 'var(--color-text-main, #1f2937)' }}>
+      <Tag variant="neutral" color="secondary" size="sm" style={{ marginBottom: '1rem' }}>
+        Remote MFE Pages Router
+      </Tag>
+      
+      <Card variant="bordered">
+        <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 700 }}>
+              Next.js 15 Pages Router Configuration
+            </h2>
           </div>
-        </Card>
-        <Card>
-          <div className={styles.cardContent}>
-            <strong>98%</strong>
-            <span>Uptime</span>
-          </div>
-        </Card>
-      </div>
+          
+          <p style={{ margin: 0, fontSize: '1rem', color: 'var(--color-text-muted, #4b5563)', lineHeight: 1.6 }}>
+            Esta aplicação microfrontend está rodando de forma independente e é integrada dinamicamente via Module Federation 2.0. Ela utiliza a arquitetura clássica do <strong>Next.js Pages Router</strong>.
+          </p>
 
-      <div style={{ marginBottom: '1.5rem', maxWidth: '300px' }}>
-        <Dropdown
-          label="Filtrar por status"
-          value={filter}
-          onChange={setFilter}
-        >
-          <Dropdown.Item value="all">Todos</Dropdown.Item>
-          <Dropdown.Item value="ok">OK</Dropdown.Item>
-          <Dropdown.Item value="warn">Alerta</Dropdown.Item>
-        </Dropdown>
-      </div>
-
-      <table className={styles.table} role="table">
-        <thead>
-          <tr>
-            <th>Métrica</th>
-            <th>Valor</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {initialMetrics
-            .filter(m => filter === 'all' || m.status === filter)
-            .map(m => (
-              <tr key={m.label}>
-                <td>{m.label}</td>
-                <td>{m.value}</td>
-                <td>
-                  <Tag variant="neutral" color={statusVariant[m.status]}>{m.status}</Tag>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+          <p style={{ margin: 0, fontSize: '1rem', color: 'var(--color-text-muted, #4b5563)', lineHeight: 1.6 }}>
+            Consome componentes do Design System corporativo <code>@rafacdomin/ds-core</code> compartilhados em tempo de execução pelo Shell para assegurar consistência visual e eficiência de banda.
+          </p>
+        </div>
+      </Card>
     </div>
   );
 }
